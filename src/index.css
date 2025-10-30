@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+/* =========================================================
+   🌿 SPLITAIRE THEME
+   Purpose: A clean, trustworthy, and friendly green-based UI system
+   ========================================================= */
+@theme {
+
+  /* ---------------------------------------------------------
+     🎨 Primary Color — Brand Identity
+     ---------------------------------------------------------
+     Purpose:
+     Your brand’s main color — represents Splitaire’s identity.
+     It appears on key actions and the most important UI elements.
+
+     Typical uses:
+     - Primary buttons (bg-primary, hover:bg-primary-light)
+     - Active nav links (text-primary)
+     - Icons or highlights in dashboards
+     - Progress indicators or loading bars
+  --------------------------------------------------------- */
+  --color-primary: #166534;
+  /* Forest Green */
+  --color-primary-light: #22c55e;
+  /* Soft Mint (hover/focus) */
+  --color-primary-dark: #064e3b;
+  /* Deep Forest (active state) */
+
+
+  /* ---------------------------------------------------------
+     🟡 Secondary Color — Supporting & Attention Highlights
+     ---------------------------------------------------------
+     Purpose:
+     A warm, contrasting color that complements your primary.
+     Used for secondary actions, highlights, and subtle attention.
+
+     Typical uses:
+     - Secondary buttons or badges
+     - “Pending” or “In progress” status
+     - Hover states for non-primary items
+  --------------------------------------------------------- */
+  --color-secondary: #facc15;
+  /* Gold Accent */
+
+
+  /* ---------------------------------------------------------
+     💚 Accent Color — Success & Positive Feedback
+     ---------------------------------------------------------
+     Purpose:
+     A lively, energizing color for success, positive alerts, or call-to-actions.
+     It should feel friendly and uplifting without overpowering the UI.
+
+     Typical uses:
+     - Success states (“Bill Split Successfully!”)
+     - Positive graph highlights or toggles
+     - Confirmation modals or completed payments
+  --------------------------------------------------------- */
+  --color-accent: #10b981;
+  /* Emerald Green */
+
+
+  /* ---------------------------------------------------------
+     ⚫ Neutral Colors — Text, Borders, Subtle UI Elements
+     ---------------------------------------------------------
+     Purpose:
+     Used for typography, borders, and less dominant elements.
+     Keeps the UI readable and balanced.
+
+     Typical uses:
+     - Regular text (text-neutral)
+     - Borders, outlines, dividers
+     - Placeholder text, muted descriptions
+  --------------------------------------------------------- */
+  --color-neutral: #64748b;
+  /* Slate Gray */
+
+
+  /* ---------------------------------------------------------
+     ⚪ Background & Surface — Layout and Depth
+     ---------------------------------------------------------
+     Purpose:
+     Defines page structure, layers, and card contrasts.
+     Background is for full-page color; surface is for panels/cards.
+
+     Typical uses:
+     - bg-background → App background
+     - bg-surface → Cards, modals, popups
+  --------------------------------------------------------- */
+  --color-background: #f8fafc;
+  /* Light Gray */
+  --color-surface: #ffffff;
+  /* White (Card/Panel) */
+
+
+  /* ---------------------------------------------------------
+     ❌ Error Color — Alerts & Validation
+     ---------------------------------------------------------
+     Purpose:
+     Signals destructive actions, validation errors, or important warnings.
+
+     Typical uses:
+     - Error text (text-error)
+     - Delete buttons
+     - Input validation errors
+  --------------------------------------------------------- */
+  --color-error: #ef4444;
+  /* Red (Error) */
+}
