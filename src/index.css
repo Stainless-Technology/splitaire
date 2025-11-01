@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+body {
+   font-family: "Inter", sans-serif;
+}
+
 /* =========================================================
    🌿 SPLITAIRE THEME
    Purpose: A clean, trustworthy, and friendly green-based UI system
