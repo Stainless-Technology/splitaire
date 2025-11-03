@@ -17,7 +17,7 @@ import BillSummaryPage from "./pages/dashboard/BillSummaryPage";
 import HistoryPage from "./pages/dashboard/HistoryPage";
 import ProfilePage from "./pages/dashboard/ProfilePage";
 import Onboarding from "./pages/landing/Onboarding";
-import GuestCreateBillPage from "../guest/GuestCreateBillPage";
+import GuestCreateBillPage from "./guest/GuestCreateBillPage";
 import AddFundsPage from "./components/AddFundsPage";
 import HistoryDetail from "./pages/dashboard/HistoryDetail";
 

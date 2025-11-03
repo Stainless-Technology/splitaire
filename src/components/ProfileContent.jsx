@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { RxSwitch } from "react-icons/rx";
 import {
   CreditCard,
   Bell,
@@ -10,6 +9,10 @@ import {
   ChevronDown,
   Camera,
   ChevronUp,
+  Lock,
+  Shield,
+  Mail,
+  UserCircle,
 } from "lucide-react";
 
 const ProfileContent = () => {
@@ -46,164 +49,305 @@ const ProfileContent = () => {
       "Go to Profile → Profile Information, then click 'Change Avatar'. Choose a new image from your device and click 'Save Profile'. Your updated photo appears across all your groups and bills.",
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <main className="flex-1 p-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8">
-          Profile & Settings
-        </h1>
+  const notificationLabels = {
+    bills: "Bill Updates & Reminders",
+    features: "New Features & Updates",
+    payments: "Payment Confirmations",
+    marketing: "Marketing & Promotions",
+  };
 
-        <div className="grid md:grid-cols-2 gap-10 mb-10">
-          <div>
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">
-              Profile Information
-            </h2>
-            <div className="flex flex-col items-start space-y-4">
-              <div className="flex flex-col items-center">
-                <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center">
-                  <User className="w-8 h-8 text-gray-500" />
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+            Profile & Settings
+          </h1>
+          <p className="text-gray-600">
+            Manage your account settings and preferences
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-6 mb-6">
+          {/* Profile Card */}
+          <div className="lg:col-span-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <div className="flex flex-col items-center text-center">
+              <div className="relative mb-4">
+                <div className="w-32 h-32 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg">
+                  <User className="w-16 h-16 text-white" />
                 </div>
-                <button className="mt-3 flex items-center gap-2 font-semibold px-6 py-3 rounded-lg text-sm text-white bg-emerald-600 border hover:underline">
-                  <Camera className="w-4 h-4" /> Change Avatar
+                <button className="absolute bottom-0 right-0 bg-white p-2.5 rounded-full shadow-lg border-2 border-gray-100 hover:bg-gray-50 transition">
+                  <Camera className="w-5 h-5 text-gray-700" />
                 </button>
               </div>
-              <label className="block text-gray-800 font-semibold mb-2 text-sm">
-                Full Name
-              </label>
-              <input
-                type="text"
-                placeholder="Jane Doe"
-                className="w-full border border-gray-300 text-black rounded-lg p-3"
-              />
-              <label className="block text-gray-800 font-semibold mb-2 text-sm">
-                Email
-              </label>
-              <input
-                type="email"
-                placeholder="Jane.doe@example.com"
-                className="w-full border border-gray-300 text-black rounded-lg p-3"
-              />
-              <button className="bg-emerald-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-emerald-700 transition">
-                Save Profile
+              <h2 className="text-2xl font-bold text-gray-900 mb-1">
+                Jane Doe
+              </h2>
+              <p className="text-gray-500 mb-6">jane.doe@example.com</p>
+              <button className="w-full bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-emerald-700 transition shadow-sm">
+                Edit Profile
               </button>
             </div>
           </div>
 
-          <div>
-            <h2 className="text-xl font-semibold mb-4 text-gray-700">
-              Account Security
-            </h2>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between border border-gray-300 rounded-lg p-3">
-                <p className="font-medium text-gray-700">Change Password</p>
-                <button className="bg-emerald-600 text-white px-4 py-2 rounded-md font-medium hover:bg-emerald-800">
-                  Change
-                </button>
+          {/* Profile Information */}
+          <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-emerald-100 rounded-lg">
+                <UserCircle className="w-6 h-6 text-emerald-600" />
               </div>
-              <div className="flex items-center justify-between border border-gray-300 rounded-lg p-3">
-                <p className="font-medium text-gray-700">
-                  Two-Factor Authentication
-                </p>
-                <RxSwitch className="accent-emerald-600 w-5 h-5" />
+              <h2 className="text-2xl font-bold text-gray-900">
+                Personal Information
+              </h2>
+            </div>
+
+            <div className="space-y-5">
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  placeholder="Jane Doe"
+                  className="w-full border border-gray-300 text-gray-900 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Email Address
+                </label>
+                <div className="relative">
+                  <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="email"
+                    placeholder="jane.doe@example.com"
+                    className="w-full border border-gray-300 text-gray-900 rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
+                  />
+                </div>
+              </div>
+
+              <div className="pt-4">
+                <button className="bg-emerald-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-emerald-700 transition shadow-sm">
+                  Save Changes
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
-            <CreditCard className="w-5 h-5 text-emerald-600" /> Payment Method
-          </h2>
+        {/* Security Settings */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-blue-100 rounded-lg">
+              <Shield className="w-6 h-6 text-blue-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Security Settings
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4">
+            <div className="border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <Lock className="w-5 h-5 text-gray-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Password</p>
+                    <p className="text-sm text-gray-500">
+                      Last changed 3 months ago
+                    </p>
+                  </div>
+                </div>
+                <button className="bg-gray-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">
+                  Change
+                </button>
+              </div>
+            </div>
+
+            <div className="border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-gray-100 rounded-lg">
+                    <Shield className="w-5 h-5 text-gray-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      Two-Factor Auth
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Add an extra layer of security
+                    </p>
+                  </div>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" className="sr-only peer" />
+                  <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Payment Methods */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-purple-100 rounded-lg">
+              <CreditCard className="w-6 h-6 text-purple-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Payment Methods
+            </h2>
+          </div>
+
           <div className="space-y-3">
-            <div className="flex justify-between items-center border border-gray-300 rounded-lg p-3">
-              <p>
-                Visa ending in 4242 <br /> • Expires 12/25
-              </p>
-              <button className="text-sm text-red-500 hover:underline">
-                Remove
-              </button>
+            <div className="border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition bg-gradient-to-r from-gray-50 to-white">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded flex items-center justify-center text-white font-bold text-xs">
+                    VISA
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      •••• •••• •••• 4242
+                    </p>
+                    <p className="text-sm text-gray-500">Expires 12/25</p>
+                  </div>
+                </div>
+                <button className="text-sm text-red-600 hover:text-red-700 font-medium">
+                  Remove
+                </button>
+              </div>
             </div>
-            <div className="flex justify-between items-center border border-gray-300 rounded-lg p-3">
-              <p>
-                Mastercard ending in 8888 <br /> • Expires 7/25
-              </p>
-              <button className="text-sm text-red-500 hover:underline">
-                Remove
-              </button>
+
+            <div className="border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition bg-gradient-to-r from-gray-50 to-white">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-8 bg-gradient-to-r from-orange-600 to-red-500 rounded flex items-center justify-center text-white font-bold text-xs">
+                    MC
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900">
+                      •••• •••• •••• 8888
+                    </p>
+                    <p className="text-sm text-gray-500">Expires 07/25</p>
+                  </div>
+                </div>
+                <button className="text-sm text-red-600 hover:text-red-700 font-medium">
+                  Remove
+                </button>
+              </div>
             </div>
-            <button className="text-sm text-emerald-600 hover:underline">
-              + Add New Method
+
+            <button className="w-full border-2 border-dashed border-gray-300 rounded-xl p-4 text-emerald-600 font-semibold hover:border-emerald-500 hover:bg-emerald-50 transition">
+              + Add New Payment Method
             </button>
           </div>
         </div>
 
-        <div className="mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
-            <Bell className="w-5 h-5 text-emerald-600" /> Notification
-            Preferences
-          </h2>
+        {/* Notifications */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-amber-100 rounded-lg">
+              <Bell className="w-6 h-6 text-amber-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Notification Preferences
+            </h2>
+          </div>
+
           <div className="space-y-3">
             {Object.entries(notifications).map(([key, value]) => (
               <div
                 key={key}
-                className="flex justify-between items-center border border-gray-300 rounded-lg p-3"
+                className="flex justify-between items-center border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition"
               >
-                <p className="capitalize">{key.replace(/([A-Z])/g, " $1")}</p>
-                <input
-                  type="checkbox"
-                  checked={value}
-                  onChange={() =>
-                    setNotifications({ ...notifications, [key]: !value })
-                  }
-                  className="accent-emerald-600 w-5 h-5"
-                />
+                <div>
+                  <p className="font-semibold text-gray-900">
+                    {notificationLabels[key]}
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    {key === "bills" && "Get notified about bill updates"}
+                    {key === "features" && "Learn about new app features"}
+                    {key === "payments" && "Receive payment receipts"}
+                    {key === "marketing" && "Special offers and news"}
+                  </p>
+                </div>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={value}
+                    onChange={() =>
+                      setNotifications({ ...notifications, [key]: !value })
+                    }
+                    className="sr-only peer"
+                  />
+                  <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                </label>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mb-10">
-          <h2 className="text-xl font-semibold mb-4 text-gray-700 flex items-center gap-2">
-            <HelpCircle className="w-5 h-5 text-emerald-600" /> Help and Support
-          </h2>
+        {/* Help & Support */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="p-2 bg-indigo-100 rounded-lg">
+              <HelpCircle className="w-6 h-6 text-indigo-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900">
+              Help & Support
+            </h2>
+          </div>
+
           <div className="space-y-3">
             {Object.entries(faqs).map(([key, open]) => (
-              <div key={key} className="border border-gray-300 rounded-lg">
+              <div
+                key={key}
+                className="border border-gray-200 rounded-xl overflow-hidden hover:border-emerald-300 transition"
+              >
                 <button
                   onClick={() => toggleFAQ(key)}
-                  className="w-full text-left px-4 py-3 font-medium flex justify-between items-center"
+                  className="w-full text-left px-6 py-4 font-semibold flex justify-between items-center bg-white hover:bg-gray-50 transition"
                 >
-                  <span>
+                  <span className="text-gray-900">
                     {key === "addBill" && "How do I add a new bill?"}
                     {key === "unevenSplit" && "Can I split bills unevenly?"}
                     {key === "invite" && "How do I invite others to a bill?"}
-                    {key === "unpaid" && "What if someone doesn’t pay?"}
+                    {key === "unpaid" && "What if someone doesn't pay?"}
                     {key === "updatePic" &&
                       "How do I update my profile picture?"}
                   </span>
                   {open ? (
-                    <ChevronUp className="w-5 h-5 text-gray-500" />
+                    <ChevronUp className="w-5 h-5 text-emerald-600" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-500" />
+                    <ChevronDown className="w-5 h-5 text-gray-400" />
                   )}
                 </button>
                 {open && (
-                  <p className="px-4 pb-3 text-gray-600 text-sm leading-relaxed border-t bg-gray-50">
-                    {faqAnswers[key]}
-                  </p>
+                  <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                    <p className="text-gray-700 leading-relaxed">
+                      {faqAnswers[key]}
+                    </p>
+                  </div>
                 )}
               </div>
             ))}
           </div>
         </div>
 
-        <button
-          onClick={() => navigate("/")}
-          type="button"
-          className="bg-emerald-600 text-white px-6 py-3 rounded-lg hover:bg-emerald-800 flex items-center gap-2"
-        >
-          <LogOut className="w-5 h-5" /> Log Out
-        </button>
+        {/* Logout Button */}
+        <div className="flex justify-center pt-4">
+          <button
+            onClick={() => navigate("/")}
+            type="button"
+            className="bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 flex items-center gap-3 font-semibold shadow-sm transition"
+          >
+            <LogOut className="w-5 h-5" /> Log Out
+          </button>
+        </div>
       </main>
     </div>
   );
