@@ -17,6 +17,8 @@ import BillSummaryPage from './pages/dashboard/BillSummaryPage';
 import HistoryPage from './pages/dashboard/HistoryPage';
 import ProfilePage from './pages/dashboard/ProfilePage';
 import Onboarding from './pages/landing/Onboarding';
+import GuestCreateBillPage from '../guest/GuestCreateBillPage';
+import AddFundsPage from './components/AddFundsPage';
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
           <Route path="/welcome" element={<GuestLandingPage />} />
           <Route path="/login" element={<SignInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/guest-1" element={<GuestCreateBillPage />} />
         </Route>
         
         <Route path="/dashboard" element={<DashboardLayout />}>
@@ -36,6 +39,7 @@ function App() {
           <Route path="summary/:id" element={<BillSummaryPage />} />
           <Route path="history" element={<HistoryPage />} />
           <Route path="profile" element={<ProfilePage />} />
+          <Route path="funds" element={<AddFundsPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -2,9 +2,11 @@ import React from 'react';
 import { Menu, X, Users, Receipt, Wallet } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import FeatureCard from '../../components/FeaturedCard';
+import { useNavigate } from 'react-router-dom';
 
 
 const Onboarding = () => {
+  const navigate = useNavigate()
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
       <Navbar />
@@ -25,7 +27,7 @@ const Onboarding = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <button className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+            <button onClick={() => navigate('/welcome')} className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
               <span>Get Started</span>
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -95,14 +97,14 @@ const Onboarding = () => {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Join thousands of users who've made expense splitting effortless
           </p>
-          <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-4">
+          <button onClick={() => navigate('/welcome')}  className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-4">
             Get Started Free
           </button>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12">
+      {/* <footer className="bg-gray-900 text-gray-300 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
@@ -142,7 +144,7 @@ const Onboarding = () => {
             <p>&copy; 2025 Splitaire. All rights reserved.</p>
           </div>
         </div>
-      </footer>
+      </footer> */}
     </div>
   );
 };

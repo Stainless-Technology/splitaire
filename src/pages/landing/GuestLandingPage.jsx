@@ -19,16 +19,15 @@ const GuestLandingPage = () => {
               Splitaire
             </span>
           </div>
-            <button className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center space-x-2">
-              <span>Get Started</span>
-              <ArrowRight className="w-4 h-4" />
+            <button onClick={()=>navigate('/signup')} className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-2.5 rounded-lg font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200">
+              Sign Up
             </button>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-10">
         <div className="flex flex-col items-center">
           {/* Badge */}
           <div className="inline-flex items-center space-x-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full mb-8 animate-pulse">
@@ -42,7 +41,7 @@ const GuestLandingPage = () => {
           </h1>
 
           {/* CTA Button */}
-          <button onClick={()=>navigate('/createbill')} className="group bg-emerald-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-emerald-700 hover:shadow-2xl hover:scale-105 transition-all duration-300 mb-12 flex items-center space-x-3">
+          <button onClick={()=>navigate('/guest-1')} className="group bg-emerald-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:bg-emerald-700 hover:shadow-2xl hover:scale-105 transition-all duration-300 mb-12 flex items-center space-x-3">
             <span>Create a Bill</span>
             <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
           </button>
@@ -122,7 +121,7 @@ const GuestLandingPage = () => {
           <p className="text-xl text-emerald-50 mb-8 max-w-2xl mx-auto">
             Join thousands who trust Splitaire for fair and easy expense splitting
           </p>
-          <button className="bg-white text-emerald-600 px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
+          <button onClick={()=>navigate('/guest-1')} className="bg-white text-emerald-600 px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300">
             Create a Bill Now
           </button>
         </div>

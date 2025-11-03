@@ -1,8 +1,10 @@
 // src/components/DashboardHomePage.jsx
 import React from 'react';
 import { Wallet, Plus, FileText, History, User, RefreshCw, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const DashboardHomePage = () => {
+  const navigate = useNavigate()
   const recentActivity = [
     { id: 1, title: 'You paid for Groceries', amount: -45.00, time: '2 hours ago', type: 'expense' },
     { id: 2, title: 'David sent you money', amount: 20.00, time: 'Yesterday', type: 'income' },
@@ -30,7 +32,7 @@ const DashboardHomePage = () => {
             <Wallet className="w-7 h-7" />
           </div>
         </div>
-        <button className="flex items-center space-x-2 bg-white text-emerald-600 px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
+        <button onClick={() => navigate('funds')} className="flex items-center space-x-2 bg-white text-emerald-600 px-6 py-3 rounded-xl font-semibold hover:shadow-lg transition-all">
           <Plus className="w-5 h-5" />
           <span>Add Funds</span>
         </button>
@@ -89,7 +91,7 @@ const DashboardHomePage = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
         <div className="px-8 py-6 border-b border-gray-100 flex items-center justify-between">
           <h3 className="text-xl font-bold text-gray-900">Recent Activity</h3>
-          <button className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors text-sm">
+          <button onClick={()=> navigate('/dashboard/history')} className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors text-sm">
             View All
           </button>
         </div>
