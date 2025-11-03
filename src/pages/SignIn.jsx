@@ -1,19 +1,11 @@
 import React, { useState } from "react";
-import {
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  ArrowRight,
-  Chrome,
-  Apple,
-  Sparkles,
-} from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Chrome, Apple, Sparkles } from "lucide-react";
 import Logo from "../components/Logo";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SignIn() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,6 +28,7 @@ export default function SignIn() {
       </div>
 
       <div className="w-full max-w-md relative z-10">
+
         {/* Card */}
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20">
           {/* Header */}
@@ -43,12 +36,8 @@ export default function SignIn() {
             <div className="inline-flex items-center justify-center w-12 h-12 b rounded-2xl mb-4 shadow-lg">
               <Logo />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Welcome Back!
-            </h2>
-            <p className="text-gray-600">
-              Sign in to manage your bills and expenses
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back!</h2>
+            <p className="text-gray-600">Sign in to manage your bills and expenses</p>
           </div>
 
           {/* Form */}
@@ -96,11 +85,7 @@ export default function SignIn() {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-emerald-600 transition-colors"
                   >
-                    {showPassword ? (
-                      <EyeOff className="w-5 h-5" />
-                    ) : (
-                      <Eye className="w-5 h-5" />
-                    )}
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
               </div>
@@ -130,7 +115,7 @@ export default function SignIn() {
               <p className="text-gray-600">
                 Don't have an account?{" "}
                 <button
-                  onClick={() => navigate("/signup")}
+                onClick={()=> navigate('/signup')}
                   type="button"
                   className="text-emerald-600 font-bold hover:text-emerald-700 transition-colors hover:underline"
                 >
@@ -145,9 +130,7 @@ export default function SignIn() {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500 font-semibold">
-                  Or continue with
-                </span>
+                <span className="px-4 bg-white text-gray-500 font-semibold">Or continue with</span>
               </div>
             </div>
 
@@ -176,7 +159,7 @@ export default function SignIn() {
             {/* Guest Access */}
             <div className="text-center pt-4 pb-2">
               <button
-                onClick={() => navigate("/createbill")}
+              onClick={()=> navigate('/createbill')}
                 type="button"
                 className="inline-flex items-center space-x-2 text-gray-600 font-semibold hover:text-emerald-600 transition-colors group"
               >
@@ -190,13 +173,8 @@ export default function SignIn() {
         {/* Footer Text */}
         <p className="text-center text-white/90 text-sm mt-6 font-medium">
           By signing in, you agree to our{" "}
-          <button className="underline hover:text-white transition-colors">
-            Terms
-          </button>{" "}
-          and{" "}
-          <button className="underline hover:text-white transition-colors">
-            Privacy Policy
-          </button>
+          <button className="underline hover:text-white transition-colors">Terms</button> and{" "}
+          <button className="underline hover:text-white transition-colors">Privacy Policy</button>
         </p>
       </div>
     </div>
