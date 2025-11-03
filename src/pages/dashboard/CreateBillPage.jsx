@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, X, User, DollarSign, FileText, Users, Sparkles, ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
+import Navbar from '../../components/Navbar';
 
 
 const CreateBillPage = () => {

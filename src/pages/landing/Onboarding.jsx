@@ -1,8 +1,9 @@
-import React from 'react'
-import FeatureCard from '../components/FeaturedCard';
-import Navbar from '../components/Navbar';
-import {Users, Receipt, Wallet } from 'lucide-react';
+import React from 'react';
+import { Menu, X, Users, Receipt, Wallet } from 'lucide-react';
+import Navbar from '../../components/Navbar';
+import FeatureCard from '../../components/FeaturedCard';
 import { useNavigate } from 'react-router-dom';
+
 
 const Onboarding = () => {
   const navigate = useNavigate()
@@ -26,7 +27,7 @@ const Onboarding = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <button onClick={() => navigate('landingpage')} className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
+            <button onClick={() => navigate('/welcome')} className="group bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-4 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2">
               <span>Get Started</span>
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -96,13 +97,56 @@ const Onboarding = () => {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Join thousands of users who've made expense splitting effortless
           </p>
-          <button onClick={()=>navigate('/landingpage')} className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-4">
+          <button onClick={() => navigate('/welcome')}  className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-4">
             Get Started Free
           </button>
         </div>
       </section>
+
+      {/* Footer */}
+      {/* <footer className="bg-gray-900 text-gray-300 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h4 className="font-bold text-white mb-4">Product</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Security</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Company</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">About</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Blog</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Careers</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Support</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">FAQ</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-white mb-4">Legal</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Privacy</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Terms</a></li>
+                <li><a href="#" className="hover:text-emerald-400 transition-colors">Cookie Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-8 text-center">
+            <p>&copy; 2025 Splitaire. All rights reserved.</p>
+          </div>
+        </div>
+      </footer> */}
     </div>
   );
 };
 
-export default Onboarding
+export default Onboarding;

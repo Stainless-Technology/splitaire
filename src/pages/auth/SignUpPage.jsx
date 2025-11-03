@@ -1,22 +1,29 @@
 import React, { useState } from "react";
-import { Mail, Lock, Eye, EyeOff, ArrowRight, Chrome, Apple, Sparkles } from "lucide-react";
-import Logo from "../components/Logo";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Chrome, Apple, User, CheckCircle, Sparkles } from "lucide-react";
+import Logo from "../../components/Logo";
 import { useNavigate } from "react-router-dom";
 
 
-export default function SignIn() {
+export default function SignUp() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agree: false,
+  });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Login submitted!");
-    navigate('/DashboardHome ')
+    alert("Signup form submitted!");
   };
 
   return (
@@ -29,19 +36,41 @@ export default function SignIn() {
 
       <div className="w-full max-w-md relative z-10">
 
+
         {/* Card */}
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20">
           {/* Header */}
           <div className="px-8 py-10 text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 b rounded-2xl mb-4 shadow-lg">
+            <div className="inline-flex items-center justify-center w-12 h-12  rounded-2xl mb-4 shadow-lg">
               <Logo />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back!</h2>
-            <p className="text-gray-600">Sign in to manage your bills and expenses</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Join Splitaire</h2>
+            <p className="text-gray-600">Create your account and start splitting bills effortlessly</p>
           </div>
 
           {/* Form */}
           <div className="px-8 pb-8 space-y-5">
+            {/* Name Input */}
+            <div>
+              <label className="block text-gray-800 font-semibold mb-2 text-sm">
+                Full Name
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl opacity-0 group-focus-within:opacity-100 blur transition-opacity"></div>
+                <div className="relative">
+                  <User className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-emerald-600 transition-colors" />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Jon Smith"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full pl-12 pr-4 py-3.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:bg-white focus:outline-none transition-all text-gray-900 font-medium"
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Email Input */}
             <div>
               <label className="block text-gray-800 font-semibold mb-2 text-sm">
@@ -75,7 +104,7 @@ export default function SignIn() {
                   <input
                     type={showPassword ? "text" : "password"}
                     name="password"
-                    placeholder="Enter your password"
+                    placeholder="Create a strong password"
                     value={formData.password}
                     onChange={handleChange}
                     className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:bg-white focus:outline-none transition-all text-gray-900 font-medium"
@@ -91,14 +120,53 @@ export default function SignIn() {
               </div>
             </div>
 
-            {/* Forgot Password */}
-            <div className="text-right">
-              <button
-                type="button"
-                className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors text-sm hover:underline"
-              >
-                Forgot Password?
-              </button>
+            {/* Confirm Password Input */}
+            <div>
+              <label className="block text-gray-800 font-semibold mb-2 text-sm">
+                Confirm Password
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl opacity-0 group-focus-within:opacity-100 blur transition-opacity"></div>
+                <div className="relative">
+                  <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-emerald-600 transition-colors" />
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    name="confirmPassword"
+                    placeholder="Re-enter your password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    className="w-full pl-12 pr-12 py-3.5 bg-gray-50 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:bg-white focus:outline-none transition-all text-gray-900 font-medium"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-emerald-600 transition-colors"
+                  >
+                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Terms Checkbox */}
+            <div className="flex items-center space-x-3 py-2">
+              <input
+                type="checkbox"
+                name="agree"
+                checked={formData.agree}
+                onChange={handleChange}
+                className="mt-1 w-5 h-5 text-emerald-600 border-gray-300 rounded focus:ring-2 focus:ring-emerald-500 cursor-pointer"
+              />
+              <label className="text-sm text-gray-600 leading-relaxed">
+                I agree to the{" "}
+                <button type="button" className="text-emerald-600 font-semibold hover:underline">
+                  Terms of Service
+                </button>{" "}
+                and{" "}
+                <button type="button" className="text-emerald-600 font-semibold hover:underline">
+                  Privacy Policy
+                </button>
+              </label>
             </div>
 
             {/* Submit Button */}
@@ -106,23 +174,9 @@ export default function SignIn() {
               onClick={handleSubmit}
               className="w-full bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2 group"
             >
-              <span>Log In</span>
+              <span>Create Account</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-
-            {/* Sign Up Link */}
-            <div className="text-center py-2">
-              <p className="text-gray-600">
-                Don't have an account?{" "}
-                <button
-                onClick={()=> navigate('/signup')}
-                  type="button"
-                  className="text-emerald-600 font-bold hover:text-emerald-700 transition-colors hover:underline"
-                >
-                  Sign Up Free
-                </button>
-              </p>
-            </div>
 
             {/* Divider */}
             <div className="relative my-6">
@@ -130,7 +184,7 @@ export default function SignIn() {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500 font-semibold">Or continue with</span>
+                <span className="px-4 bg-white text-gray-500 font-semibold">Or sign up with</span>
               </div>
             </div>
 
@@ -156,26 +210,37 @@ export default function SignIn() {
               </button>
             </div>
 
-            {/* Guest Access */}
+            {/* Sign In Link */}
             <div className="text-center pt-4 pb-2">
-              <button
-              onClick={()=> navigate('/createbill')}
-                type="button"
-                className="inline-flex items-center space-x-2 text-gray-600 font-semibold hover:text-emerald-600 transition-colors group"
-              >
-                <span>Continue as Guest</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <p className="text-gray-600">
+                Already have an account?{" "}
+                <button
+                onClick={()=>navigate('/login')}
+                  type="button"
+                  className="text-emerald-600 font-bold hover:text-emerald-700 transition-colors hover:underline"
+                >
+                  Login
+                </button>
+              </p>
             </div>
           </div>
         </div>
 
-        {/* Footer Text */}
-        <p className="text-center text-white/90 text-sm mt-6 font-medium">
-          By signing in, you agree to our{" "}
-          <button className="underline hover:text-white transition-colors">Terms</button> and{" "}
-          <button className="underline hover:text-white transition-colors">Privacy Policy</button>
-        </p>
+        {/* Features */}
+        <div className="grid grid-cols-3 gap-3 mt-6">
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 text-center">
+            <CheckCircle className="w-6 h-6 text-white mx-auto mb-1" />
+            <p className="text-white text-xs font-semibold">Free Forever</p>
+          </div>
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 text-center">
+            <CheckCircle className="w-6 h-6 text-white mx-auto mb-1" />
+            <p className="text-white text-xs font-semibold">No Credit Card</p>
+          </div>
+          <div className="bg-white/20 backdrop-blur-sm rounded-xl p-3 text-center">
+            <CheckCircle className="w-6 h-6 text-white mx-auto mb-1" />
+            <p className="text-white text-xs font-semibold">Instant Setup</p>
+          </div>
+        </div>
       </div>
     </div>
   );

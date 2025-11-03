@@ -1,33 +1,49 @@
-import React from 'react'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Onboarding from './pages/Onboarding'
-import GuestLandingPage from './pages/GuestLandingPage'
-import CreateBillPage from './pages/CreateBillPage '
-import BillViewPage from './pages/BillViewPage'
-import BillSummaryPage from './pages/BillSummaryPage'
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
-import Home from "./pages/Home";
-import DashboardHome from './pages/DashboardHome ';
-import Sidebar from './components/Sidebar';
+// src/App.jsx
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const App = () => {
+// Layouts
+import DashboardLayout from './layouts/DashboardLayout';
+import GuestLayout from './layouts/GuestLayout';
+
+// Pages
+import SignInPage from './pages/auth/SignInPage';
+import SignUpPage from './pages/auth/SignUpPage';
+import GuestLandingPage from './pages/landing/GuestLandingPage';
+import DashboardHomePage from './pages/dashboard/DashboardHomePage';
+import CreateBillPage from './pages/dashboard/CreateBillPage';
+import BillViewPage from './pages/dashboard/BillViewPage';
+import BillSummaryPage from './pages/dashboard/BillSummaryPage';
+import HistoryPage from './pages/dashboard/HistoryPage';
+import ProfilePage from './pages/dashboard/ProfilePage';
+import Onboarding from './pages/landing/Onboarding';
+import GuestCreateBillPage from '../guest/GuestCreateBillPage';
+import AddFundsPage from './components/AddFundsPage';
+
+function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Onboarding />} />
-        {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/login" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/landingpage" element={<GuestLandingPage />} />
-        <Route path="/createbill" element={<CreateBillPage />} />
-        <Route path="/billsummary" element={<BillSummaryPage />} />
-        <Route path="/billview" element={<BillViewPage />} />
-        <Route path="/DashboardHome" element={<DashboardHome />} />
+        <Route element={<GuestLayout />}>
+          <Route path="/" element={<Onboarding />} />
+          <Route path="/welcome" element={<GuestLandingPage />} />
+          <Route path="/login" element={<SignInPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/guest-1" element={<GuestCreateBillPage />} />
+        </Route>
+        
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<DashboardHomePage />} />
+          <Route path="create-bill" element={<CreateBillPage />} />
+          <Route path="bill/:id" element={<BillViewPage />} />
+          <Route path="summary/:id" element={<BillSummaryPage />} />
+          <Route path="history" element={<HistoryPage />} />
+          <Route path="profile" element={<ProfilePage />} />
+          <Route path="funds" element={<AddFundsPage />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
 }
 
-
-export default App
+export default App;

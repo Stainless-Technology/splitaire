@@ -1,44 +1,52 @@
 // src/components/Sidebar.jsx
 import React from 'react';
 import { X, Home, Plus, History, User } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
-const Sidebar = ({ activePage, setActivePage, isMobileMenuOpen, setIsMobileMenuOpen }) => {
-  const menuItems = [
-    { id: 'home', label: 'Home', icon: Home },
-    { id: 'create', label: 'Create Bill', icon: Plus },
-    { id: 'history', label: 'History', icon: History },
-    { id: 'profile', label: 'Profile', icon: User },
-  ];
 
-  const handleMenuClick = (itemId) => {
-    setActivePage(itemId);
-    if (setIsMobileMenuOpen) {
-      setIsMobileMenuOpen(false);
-    }
-  };
 
-  const MenuItems = () => (
+const menuItems = [
+  { id: 'home', label: 'Home', icon: Home, path: '/dashboard' },
+  { id: 'create', label: 'Create Bill', icon: Plus, path: '/dashboard/create-bill' },
+  { id: 'history', label: 'History', icon: History, path: '/dashboard/history' },
+  { id: 'profile', label: 'Profile', icon: User, path: '/dashboard/profile' },
+];
+
+const MenuItems = ({ handleMenuClick }) => {
+  const location = useLocation();
+
+  return (
     <nav className="flex-1 p-4 space-y-2">
       {menuItems.map((item) => {
         const Icon = item.icon;
+        const isActive = location.pathname === item.path;
         return (
-          <button
+          <Link
             key={item.id}
-            onClick={() => handleMenuClick(item.id)}
-            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ₦{
-              activePage === item.id
+            to={item.path}
+            onClick={handleMenuClick}
+            className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${
+              isActive
                 ? 'bg-emerald-600 text-white shadow-lg'
                 : 'text-gray-700 hover:bg-gray-100'
             }`}
           >
             <Icon className="w-5 h-5" />
             <span className="font-semibold">{item.label}</span>
-          </button>
+          </Link>
         );
       })}
     </nav>
   );
+};
+
+const Sidebar = ({ isMobileMenuOpen, setIsMobileMenuOpen }) => {
+  const handleMenuClick = () => {
+    if (setIsMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
     <>
@@ -50,7 +58,7 @@ const Sidebar = ({ activePage, setActivePage, isMobileMenuOpen, setIsMobileMenuO
             Splitaire
           </span>
         </div>
-        <MenuItems />
+        <MenuItems handleMenuClick={handleMenuClick} />
       </aside>
 
       {/* Mobile Sidebar */}
@@ -75,7 +83,7 @@ const Sidebar = ({ activePage, setActivePage, isMobileMenuOpen, setIsMobileMenuO
                 <X className="w-6 h-6 text-gray-600" />
               </button>
             </div>
-            <MenuItems />
+            <MenuItems handleMenuClick={handleMenuClick} />
           </aside>
         </>
       )}

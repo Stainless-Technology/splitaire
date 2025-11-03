@@ -1,8 +1,8 @@
 import React from 'react';
 import { CheckCircle, ArrowRight, Share2, Mail, MessageCircle, Sparkles, Download, Copy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../components/Logo';
-import Navbar from '../components/Navbar';
+import Logo from '../../components/Logo';
+import Navbar from '../../components/Navbar';
 
 
 const BillSummaryPage = () => {
