@@ -1,21 +1,11 @@
 import React, { useState } from "react";
-import {
-  Mail,
-  Lock,
-  Eye,
-  EyeOff,
-  ArrowRight,
-  Chrome,
-  Apple,
-  User,
-  CheckCircle,
-  Sparkles,
-} from "lucide-react";
+import { Mail, Lock, Eye, EyeOff, ArrowRight, Chrome, Apple, User, CheckCircle, Sparkles } from "lucide-react";
 import Logo from "../components/Logo";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SignUp() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,6 +35,8 @@ export default function SignUp() {
       </div>
 
       <div className="w-full max-w-md relative z-10">
+
+
         {/* Card */}
         <div className="bg-white/95 backdrop-blur-xl rounded-3xl shadow-2xl overflow-hidden border border-white/20">
           {/* Header */}
@@ -52,12 +44,8 @@ export default function SignUp() {
             <div className="inline-flex items-center justify-center w-12 h-12  rounded-2xl mb-4 shadow-lg">
               <Logo />
             </div>
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">
-              Join Splitaire
-            </h2>
-            <p className="text-gray-600">
-              Create your account and start splitting bills effortlessly
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Join Splitaire</h2>
+            <p className="text-gray-600">Create your account and start splitting bills effortlessly</p>
           </div>
 
           {/* Form */}
@@ -126,11 +114,7 @@ export default function SignUp() {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-emerald-600 transition-colors"
                   >
-                    {showPassword ? (
-                      <EyeOff className="w-5 h-5" />
-                    ) : (
-                      <Eye className="w-5 h-5" />
-                    )}
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
               </div>
@@ -158,11 +142,7 @@ export default function SignUp() {
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-emerald-600 transition-colors"
                   >
-                    {showConfirmPassword ? (
-                      <EyeOff className="w-5 h-5" />
-                    ) : (
-                      <Eye className="w-5 h-5" />
-                    )}
+                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
                 </div>
               </div>
@@ -179,17 +159,11 @@ export default function SignUp() {
               />
               <label className="text-sm text-gray-600 leading-relaxed">
                 I agree to the{" "}
-                <button
-                  type="button"
-                  className="text-emerald-600 font-semibold hover:underline"
-                >
+                <button type="button" className="text-emerald-600 font-semibold hover:underline">
                   Terms of Service
                 </button>{" "}
                 and{" "}
-                <button
-                  type="button"
-                  className="text-emerald-600 font-semibold hover:underline"
-                >
+                <button type="button" className="text-emerald-600 font-semibold hover:underline">
                   Privacy Policy
                 </button>
               </label>
@@ -210,9 +184,7 @@ export default function SignUp() {
                 <div className="w-full border-t border-gray-300"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-white text-gray-500 font-semibold">
-                  Or sign up with
-                </span>
+                <span className="px-4 bg-white text-gray-500 font-semibold">Or sign up with</span>
               </div>
             </div>
 
@@ -243,7 +215,7 @@ export default function SignUp() {
               <p className="text-gray-600">
                 Already have an account?{" "}
                 <button
-                  onClick={() => navigate("/login")}
+                onClick={()=>navigate('/login')}
                   type="button"
                   className="text-emerald-600 font-bold hover:text-emerald-700 transition-colors hover:underline"
                 >
