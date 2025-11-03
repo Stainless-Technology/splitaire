@@ -15,10 +15,7 @@ const BillSummaryPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-emerald-50">
-      {/* Header */}
-      <header className="bg-white/90 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
-      <Navbar />
-      </header>
+
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
@@ -44,7 +41,7 @@ const BillSummaryPage = () => {
         <div className="bg-white rounded-3xl shadow-xl p-10 mb-10 text-center border border-gray-100">
           <p className="text-emerald-600 text-sm font-semibold uppercase tracking-wide mb-3">Total Bill</p>
           <h2 className="text-7xl md:text-8xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent mb-3">
-            $95.00
+            ₦95.00
           </h2>
           <p className="text-gray-500 text-lg">Split among 3 people</p>
         </div>
@@ -59,7 +56,7 @@ const BillSummaryPage = () => {
             {splits.map((split) => (
               <div key={split.id} className="flex items-center justify-between p-6 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:shadow-md hover:border-emerald-200 transition-all">
                 <div className="flex items-center space-x-4">
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm ${
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm ₦{
                     split.type === 'owes' 
                       ? 'bg-gradient-to-br from-orange-100 to-orange-50' 
                       : 'bg-gradient-to-br from-emerald-100 to-emerald-50'
@@ -83,7 +80,7 @@ const BillSummaryPage = () => {
                   </div>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold text-gray-900">${split.amount.toFixed(2)}</p>
+                  <p className="text-2xl font-bold text-gray-900">₦{split.amount.toFixed(2)}</p>
                 </div>
               </div>
             ))}

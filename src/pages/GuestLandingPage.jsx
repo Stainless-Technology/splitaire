@@ -65,7 +65,7 @@ const GuestLandingPage = () => {
                   <span className="text-2xl">💰</span>
                 </div>
                 <div>
-                  <div className="font-bold text-gray-900">$47.50</div>
+                  <div className="font-bold text-gray-900">₦47.50</div>
                   <div className="text-sm text-gray-500">Total Split</div>
                 </div>
               </div>

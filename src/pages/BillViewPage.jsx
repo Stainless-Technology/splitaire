@@ -56,7 +56,7 @@ const BillViewPage = () => {
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0">
               <p className="text-emerald-100 text-sm font-medium mb-2">Total Amount</p>
-              <h2 className="text-5xl md:text-6xl font-extrabold">$125.75</h2>
+              <h2 className="text-5xl md:text-6xl font-extrabold">₦125.75</h2>
               <p className="text-emerald-100 mt-2 text-lg">Team Dinner at the Eatery</p>
             </div>
             
@@ -108,7 +108,7 @@ const BillViewPage = () => {
                       <p className="font-semibold text-gray-900 text-lg">{participant.name}</p>
                       <div className="flex items-center space-x-2 mt-1">
                         <DollarSign className="w-4 h-4 text-gray-400" />
-                        <p className="text-gray-500 font-medium">${participant.amount.toFixed(2)}</p>
+                        <p className="text-gray-500 font-medium">₦{participant.amount.toFixed(2)}</p>
                       </div>
                     </div>
                   </div>

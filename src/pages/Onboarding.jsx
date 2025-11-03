@@ -44,7 +44,7 @@ const Onboarding = () => {
               <div className="text-sm md:text-base text-gray-600 mt-1">Active Users</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-emerald-600">$50M+</div>
+              <div className="text-3xl md:text-4xl font-bold text-emerald-600">₦50M+</div>
               <div className="text-sm md:text-base text-gray-600 mt-1">Split Monthly</div>
             </div>
             <div className="text-center">

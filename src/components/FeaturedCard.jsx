@@ -2,7 +2,7 @@
 import { Menu, X, Users, Receipt, Wallet } from 'lucide-react';
 const FeatureCard = ({ icon: Icon, title, description, image, reverse }) => {
   return (
-    <div className={`flex flex-col ${reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-12 mb-16`}>
+    <div className={`flex flex-col ₦{reverse ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 md:gap-12 mb-16`}>
       <div className="flex-1 space-y-4">
         <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl">
           <Icon className="w-7 h-7 text-emerald-600" />

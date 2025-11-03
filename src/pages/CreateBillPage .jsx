@@ -15,7 +15,7 @@ const CreateBillPage = () => {
 
   const addParticipant = () => {
     const newId = participants.length + 1;
-    setParticipants([...participants, { id: newId, name: `Friend ${String.fromCharCode(64 + newId)}`, isMe: false }]);
+    setParticipants([...participants, { id: newId, name: `Friend ₦{String.fromCharCode(64 + newId)}`, isMe: false }]);
   };
 
   const removeParticipant = (id) => {
@@ -30,7 +30,7 @@ const CreateBillPage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-      <Navbar />
+      {/* <Navbar /> */}
 
       {/* Main Content */}
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
@@ -99,7 +99,7 @@ const CreateBillPage = () => {
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={() => setSplitType('equal')}
-                  className={`flex-1 min-w-[140px] px-6 py-4 rounded-xl font-semibold transition-all duration-200 ${
+                  className={`flex-1 min-w-[140px] px-6 py-4 rounded-xl font-semibold transition-all duration-200 ₦{
                     splitType === 'equal'
                       ? 'bg-emerald-600 text-white shadow-lg scale-105'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -113,7 +113,7 @@ const CreateBillPage = () => {
                 
                 <button
                   onClick={() => setSplitType('custom')}
-                  className={`flex-1 min-w-[140px] px-6 py-4 rounded-xl font-semibold transition-all duration-200 ${
+                  className={`flex-1 min-w-[140px] px-6 py-4 rounded-xl font-semibold transition-all duration-200 ₦{
                     splitType === 'custom'
                       ? 'bg-emerald-600 text-white shadow-lg scale-105'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -148,7 +148,7 @@ const CreateBillPage = () => {
                         type="text"
                         value={participant.name}
                         onChange={(e) => updateParticipantName(participant.id, e.target.value)}
-                        className={`w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:outline-none transition-colors font-medium ${
+                        className={`w-full pl-11 pr-4 py-3 border-2 rounded-xl focus:outline-none transition-colors font-medium ₦{
                           participant.isMe
                             ? 'border-emerald-200 bg-emerald-50 text-emerald-900 focus:border-emerald-500'
                             : 'border-gray-200 bg-white text-gray-900 focus:border-purple-500'
