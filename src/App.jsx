@@ -8,6 +8,7 @@ import BillSummaryPage from './pages/BillSummaryPage'
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
+import ProfileScreenPage from "./pages/ProfileScreenPage";
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path="/createbill" element={<CreateBillPage />} />
         <Route path="/billsummary" element={<BillSummaryPage />} />
         <Route path="/billview" element={<BillViewPage />} />
+        <Route path="/profilescreen" element={<ProfileScreenPage />} />
       </Routes>
     </BrowserRouter>
   );
