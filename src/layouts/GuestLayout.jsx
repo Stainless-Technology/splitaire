@@ -1,13 +1,8 @@
-// src/layouts/GuestLayout.jsx
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-
 const GuestLayout = () => {
-  return (
-    <div>
+  return <div>
       <Outlet />
-    </div>
-  );
+    </div>;
 };
-
 export default GuestLayout;

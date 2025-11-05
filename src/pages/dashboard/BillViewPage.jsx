@@ -1,28 +1,43 @@
 import React, { useState } from 'react';
 import { Share2, Download, Check, Clock, DollarSign, MessageCircle, Send, Users, Calendar } from 'lucide-react';
-
-
 const BillViewPage = () => {
   const [comment, setComment] = useState('');
-  
-  const participants = [
-    { id: 1, name: 'Alex Johnson', amount: 31.44, status: 'pending' },
-    { id: 2, name: 'Moresca Breezy', amount: 31.44, status: 'paid' },
-    { id: 3, name: 'Golden Ade', amount: 31.44, status: 'pending' },
-    { id: 4, name: 'Moresca Breezy', amount: 31.44, status: 'paid' }
-  ];
-
-  const comments = [
-    { id: 1, author: 'Alex Johnson', text: "I'll send my share by tomorrow morning. Thanks for organizing!", timestamp: 'Nov 3, 2025 3:25 pm' },
-    { id: 2, author: 'Alex Johnson', text: "I'll send my share by tomorrow morning. Thanks for organizing!", timestamp: 'Nov 3, 2025 3:25 pm' }
-  ];
-
+  const participants = [{
+    id: 1,
+    name: 'Alex Johnson',
+    amount: 31.44,
+    status: 'pending'
+  }, {
+    id: 2,
+    name: 'Moresca Breezy',
+    amount: 31.44,
+    status: 'paid'
+  }, {
+    id: 3,
+    name: 'Golden Ade',
+    amount: 31.44,
+    status: 'pending'
+  }, {
+    id: 4,
+    name: 'Moresca Breezy',
+    amount: 31.44,
+    status: 'paid'
+  }];
+  const comments = [{
+    id: 1,
+    author: 'Alex Johnson',
+    text: "I'll send my share by tomorrow morning. Thanks for organizing!",
+    timestamp: 'Nov 3, 2025 3:25 pm'
+  }, {
+    id: 2,
+    author: 'Alex Johnson',
+    text: "I'll send my share by tomorrow morning. Thanks for organizing!",
+    timestamp: 'Nov 3, 2025 3:25 pm'
+  }];
   const totalPaid = participants.filter(p => p.status === 'paid').length;
   const totalPending = participants.filter(p => p.status === 'pending').length;
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
-      {/* Header */}
+  return <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50">
+      {}
       <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
@@ -39,9 +54,9 @@ const BillViewPage = () => {
         </div>
       </header>
 
-      {/* Main Content */}
+      {}
       <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-        {/* Title Section */}
+        {}
         <div className="text-center mb-8">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">
             View Your Bill
@@ -51,7 +66,7 @@ const BillViewPage = () => {
           </p>
         </div>
 
-        {/* Bill Summary Card */}
+        {}
         <div className="bg-gradient-to-br from-emerald-600 to-teal-600 rounded-3xl shadow-2xl p-8 mb-8 text-white">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <div className="mb-6 md:mb-0">
@@ -80,7 +95,7 @@ const BillViewPage = () => {
           </div>
         </div>
 
-        {/* Who Owes What Section */}
+        {}
         <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden mb-8">
           <div className="bg-gradient-to-r from-emerald-50 to-teal-50 px-6 md:px-8 py-6 border-b border-gray-200">
             <div className="flex items-center justify-between">
@@ -97,8 +112,7 @@ const BillViewPage = () => {
           </div>
           
           <div className="divide-y divide-gray-100">
-            {participants.map((participant) => (
-              <div key={participant.id} className="px-6 md:px-8 py-5 hover:bg-gray-50 transition-colors">
+            {participants.map(participant => <div key={participant.id} className="px-6 md:px-8 py-5 hover:bg-gray-50 transition-colors">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-400 rounded-full flex items-center justify-center text-white font-bold text-lg">
@@ -113,20 +127,15 @@ const BillViewPage = () => {
                     </div>
                   </div>
                   
-                  {participant.status === 'paid' ? (
-                    <span className="inline-flex items-center space-x-2 px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full font-semibold">
+                  {participant.status === 'paid' ? <span className="inline-flex items-center space-x-2 px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full font-semibold">
                       <Check className="w-4 h-4" />
                       <span>Paid</span>
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center space-x-2 px-4 py-2 bg-yellow-100 text-yellow-700 rounded-full font-semibold">
+                    </span> : <span className="inline-flex items-center space-x-2 px-4 py-2 bg-yellow-100 text-yellow-700 rounded-full font-semibold">
                       <Clock className="w-4 h-4" />
                       <span>Pending</span>
-                    </span>
-                  )}
+                    </span>}
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
           
           <div className="px-6 md:px-8 py-4 bg-gray-50 border-t border-gray-200">
@@ -137,7 +146,7 @@ const BillViewPage = () => {
           </div>
         </div>
 
-        {/* Comments Section */}
+        {}
         <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
           <div className="bg-gradient-to-r from-purple-50 to-pink-50 px-6 md:px-8 py-6 border-b border-gray-200">
             <div className="flex items-center space-x-3">
@@ -148,20 +157,14 @@ const BillViewPage = () => {
             </div>
           </div>
           
-          {/* Comment Input */}
+          {}
           <div className="px-6 md:px-8 py-6 border-b border-gray-200">
             <div className="flex space-x-3">
               <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
                 Y
               </div>
               <div className="flex-1">
-                <textarea
-                  value={comment}
-                  onChange={(e) => setComment(e.target.value)}
-                  placeholder="Write a comment..."
-                  rows="3"
-                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-colors resize-none text-gray-900"
-                ></textarea>
+                <textarea value={comment} onChange={e => setComment(e.target.value)} placeholder="Write a comment..." rows="3" className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-colors resize-none text-gray-900"></textarea>
                 <button className="mt-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center space-x-2">
                   <span>Post Comment</span>
                   <Send className="w-4 h-4" />
@@ -170,10 +173,9 @@ const BillViewPage = () => {
             </div>
           </div>
           
-          {/* Comments List */}
+          {}
           <div className="divide-y divide-gray-100">
-            {comments.map((cmt) => (
-              <div key={cmt.id} className="px-6 md:px-8 py-6 hover:bg-gray-50 transition-colors">
+            {comments.map(cmt => <div key={cmt.id} className="px-6 md:px-8 py-6 hover:bg-gray-50 transition-colors">
                 <div className="flex space-x-3">
                   <div className="w-10 h-10 bg-gradient-to-br from-blue-400 to-indigo-400 rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">
                     {cmt.author.charAt(0)}
@@ -189,13 +191,10 @@ const BillViewPage = () => {
                     <p className="text-gray-700 leading-relaxed">{cmt.text}</p>
                   </div>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default BillViewPage;

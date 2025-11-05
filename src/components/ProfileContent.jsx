@@ -1,63 +1,97 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  CreditCard,
-  Bell,
-  HelpCircle,
-  LogOut,
-  User,
-  ChevronDown,
-  Camera,
-  ChevronUp,
-  Lock,
-  Shield,
-  Mail,
-  UserCircle,
-} from "lucide-react";
-
+import { CreditCard, Bell, HelpCircle, LogOut, User, ChevronDown, Camera, ChevronUp, Lock, Shield, Mail, UserCircle, Loader, AlertCircle } from "lucide-react";
+import { useAuth } from "../hooks/useAuth";
 const ProfileContent = () => {
+  const navigate = useNavigate();
+  const {
+    user,
+    logout,
+    loading: authLoading
+  } = useAuth();
+  const [formData, setFormData] = useState({
+    fullName: user?.fullName || '',
+    email: user?.email || ''
+  });
   const [notifications, setNotifications] = useState({
     bills: true,
     features: false,
     payments: true,
-    marketing: false,
+    marketing: false
   });
-  const navigate = useNavigate();
-
   const [faqs, setFaqs] = useState({
     addBill: false,
     unevenSplit: false,
     invite: false,
     unpaid: false,
-    updatePic: false,
+    updatePic: false
   });
-
-  const toggleFAQ = (key) => {
-    setFaqs({ ...faqs, [key]: !faqs[key] });
+  const [isEditing, setIsEditing] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const toggleFAQ = key => {
+    setFaqs({
+      ...faqs,
+      [key]: !faqs[key]
+    });
   };
-
   const faqAnswers = {
-    addBill:
-      "To add a new bill, go to the 'Create Bill' section in the sidebar. Enter the bill name, total amount, participants, and any notes. Once saved, the app automatically calculates how much each person owes.",
-    unevenSplit:
-      "Yes! When creating a bill, you can enable 'Split Unevenly' and manually assign amounts or percentages to each participant. This is perfect when people contribute or consume different items.",
-    invite:
-      "After creating a bill, select 'Share' or 'Invite Members'. You can invite others by email, unique bill link, or QR code. Once they accept, the bill will appear in their dashboard.",
-    unpaid:
-      "You can mark a bill as 'Pending' until everyone pays their share. The app keeps track of unpaid amounts and sends reminders automatically, or you can send one manually from the Bill Details page.",
-    updatePic:
-      "Go to Profile → Profile Information, then click 'Change Avatar'. Choose a new image from your device and click 'Save Profile'. Your updated photo appears across all your groups and bills.",
+    addBill: "To add a new bill, go to 'Create Bill' from the dashboard. Enter the bill name, total amount, participants' details, and any notes. Once saved, the app automatically calculates how much each person owes.",
+    unevenSplit: "Yes! When creating a bill, you can select 'Custom Split' and manually assign amounts to each participant. This is perfect when people order different items or contribute different amounts.",
+    invite: "After creating a bill, click 'Copy Link' to share the bill link with participants via email, messaging apps, or social media. They can view the bill and mark their payments.",
+    unpaid: "The app tracks payment status for each participant. You can mark payments as paid/unpaid from the bill details page. Bills remain 'Pending' until all participants have paid their share.",
+    updatePic: "Go to Profile → Edit Profile, then click 'Change Avatar'. Choose a new image from your device and click 'Save Changes'. Your updated photo will appear across the app."
   };
-
   const notificationLabels = {
     bills: "Bill Updates & Reminders",
     features: "New Features & Updates",
     payments: "Payment Confirmations",
-    marketing: "Marketing & Promotions",
+    marketing: "Marketing & Promotions"
   };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
+  const handleSaveProfile = async () => {
+    setError('');
+    setSuccess('');
+    setSaving(true);
+    try {
+      if (!formData.fullName.trim()) {
+        setError('Full name is required');
+        setSaving(false);
+        return;
+      }
+      setTimeout(() => {
+        setSuccess('Profile updated successfully!');
+        setIsEditing(false);
+        setSaving(false);
+        setTimeout(() => setSuccess(''), 3000);
+      }, 1000);
+    } catch (err) {
+      setError('Failed to update profile');
+      setSaving(false);
+    }
+  };
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/login');
+    } catch (err) {
+      console.error('Logout error:', err);
+      navigate('/login');
+    }
+  };
+  const getInitials = name => {
+    if (!name) return 'U';
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  };
+  if (authLoading) {
+    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <Loader className="w-12 h-12 text-emerald-600 animate-spin mx-auto mb-4" />
+          <p className="text-gray-600 text-lg">Loading profile...</p>
+        </div>
+      </div>;
+  }
+  return <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">
@@ -68,29 +102,50 @@ const ProfileContent = () => {
           </p>
         </div>
 
+        {}
+        {success && <div className="mb-6 bg-emerald-50 border-2 border-emerald-200 rounded-xl p-4 flex items-center space-x-3">
+            <div className="w-5 h-5 bg-emerald-600 rounded-full flex items-center justify-center">
+              <span className="text-white text-xs">✓</span>
+            </div>
+            <p className="text-emerald-800 font-semibold">{success}</p>
+          </div>}
+
+        {error && <div className="mb-6 bg-red-50 border-2 border-red-200 rounded-xl p-4 flex items-start space-x-3">
+            <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+            <p className="text-red-800 font-semibold">{error}</p>
+          </div>}
+
         <div className="grid lg:grid-cols-3 gap-6 mb-6">
-          {/* Profile Card */}
+          {}
           <div className="lg:col-span-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
             <div className="flex flex-col items-center text-center">
               <div className="relative mb-4">
                 <div className="w-32 h-32 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center shadow-lg">
-                  <User className="w-16 h-16 text-white" />
+                  <span className="text-4xl font-bold text-white">
+                    {getInitials(user?.fullName)}
+                  </span>
                 </div>
-                <button className="absolute bottom-0 right-0 bg-white p-2.5 rounded-full shadow-lg border-2 border-gray-100 hover:bg-gray-50 transition">
+                <button className="absolute bottom-0 right-0 bg-white p-2.5 rounded-full shadow-lg border-2 border-gray-100 hover:bg-gray-50 transition" title="Change avatar (coming soon)">
                   <Camera className="w-5 h-5 text-gray-700" />
                 </button>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 mb-1">
-                Jane Doe
+                {user?.fullName || 'User'}
               </h2>
-              <p className="text-gray-500 mb-6">jane.doe@example.com</p>
-              <button className="w-full bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-emerald-700 transition shadow-sm">
-                Edit Profile
+              <p className="text-gray-500 mb-2">{user?.email || 'user@example.com'}</p>
+              <p className="text-xs text-gray-400 mb-6">
+                Member since {new Date(user?.createdAt || Date.now()).toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric'
+              })}
+              </p>
+              <button onClick={() => setIsEditing(!isEditing)} className="w-full bg-emerald-600 text-white font-semibold px-6 py-3 rounded-xl hover:bg-emerald-700 transition shadow-sm">
+                {isEditing ? 'Cancel Edit' : 'Edit Profile'}
               </button>
             </div>
           </div>
 
-          {/* Profile Information */}
+          {}
           <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-200 p-8">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-emerald-100 rounded-lg">
@@ -106,11 +161,10 @@ const ProfileContent = () => {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Full Name
                 </label>
-                <input
-                  type="text"
-                  placeholder="Jane Doe"
-                  className="w-full border border-gray-300 text-gray-900 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
-                />
+                <input type="text" value={formData.fullName} onChange={e => setFormData({
+                ...formData,
+                fullName: e.target.value
+              })} disabled={!isEditing || saving} placeholder="Enter your full name" className={`w-full border border-gray-300 text-gray-900 rounded-xl px-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition ${!isEditing ? 'bg-gray-50 cursor-not-allowed' : ''} ${saving ? 'opacity-50' : ''}`} />
               </div>
 
               <div>
@@ -119,24 +173,33 @@ const ProfileContent = () => {
                 </label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                  <input
-                    type="email"
-                    placeholder="jane.doe@example.com"
-                    className="w-full border border-gray-300 text-gray-900 rounded-xl pl-12 pr-4 py-3 focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition"
-                  />
+                  <input type="email" value={formData.email} disabled={true} placeholder="your.email@example.com" className="w-full border border-gray-300 text-gray-900 rounded-xl pl-12 pr-4 py-3 bg-gray-50 cursor-not-allowed" />
                 </div>
+                <p className="text-xs text-gray-500 mt-1">Email cannot be changed</p>
               </div>
 
-              <div className="pt-4">
-                <button className="bg-emerald-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-emerald-700 transition shadow-sm">
-                  Save Changes
-                </button>
-              </div>
+              {isEditing && <div className="pt-4 flex gap-3">
+                  <button onClick={handleSaveProfile} disabled={saving} className={`bg-emerald-600 text-white font-semibold px-8 py-3 rounded-xl hover:bg-emerald-700 transition shadow-sm flex items-center gap-2 ${saving ? 'opacity-70 cursor-not-allowed' : ''}`}>
+                    {saving ? <>
+                        <Loader className="w-4 h-4 animate-spin" />
+                        <span>Saving...</span>
+                      </> : 'Save Changes'}
+                  </button>
+                  <button onClick={() => {
+                setIsEditing(false);
+                setFormData({
+                  fullName: user?.fullName || '',
+                  email: user?.email || ''
+                });
+              }} disabled={saving} className="bg-gray-200 text-gray-700 font-semibold px-8 py-3 rounded-xl hover:bg-gray-300 transition">
+                    Cancel
+                  </button>
+                </div>}
             </div>
           </div>
         </div>
 
-        {/* Security Settings */}
+        {}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-blue-100 rounded-lg">
@@ -157,11 +220,11 @@ const ProfileContent = () => {
                   <div>
                     <p className="font-semibold text-gray-900">Password</p>
                     <p className="text-sm text-gray-500">
-                      Last changed 3 months ago
+                      Keep your account secure
                     </p>
                   </div>
                 </div>
-                <button className="bg-gray-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">
+                <button className="bg-gray-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition" onClick={() => alert('Password change feature coming soon!')}>
                   Change
                 </button>
               </div>
@@ -178,20 +241,20 @@ const ProfileContent = () => {
                       Two-Factor Auth
                     </p>
                     <p className="text-sm text-gray-500">
-                      Add an extra layer of security
+                      Coming soon
                     </p>
                   </div>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" />
-                  <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
+                <label className="relative inline-flex items-center cursor-not-allowed opacity-50">
+                  <input type="checkbox" disabled className="sr-only peer" />
+                  <div className="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                 </label>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Payment Methods */}
+        {}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-purple-100 rounded-lg">
@@ -202,52 +265,18 @@ const ProfileContent = () => {
             </h2>
           </div>
 
-          <div className="space-y-3">
-            <div className="border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition bg-gradient-to-r from-gray-50 to-white">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-8 bg-gradient-to-r from-blue-600 to-blue-400 rounded flex items-center justify-center text-white font-bold text-xs">
-                    VISA
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      •••• •••• •••• 4242
-                    </p>
-                    <p className="text-sm text-gray-500">Expires 12/25</p>
-                  </div>
-                </div>
-                <button className="text-sm text-red-600 hover:text-red-700 font-medium">
-                  Remove
-                </button>
-              </div>
-            </div>
-
-            <div className="border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition bg-gradient-to-r from-gray-50 to-white">
-              <div className="flex justify-between items-center">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-8 bg-gradient-to-r from-orange-600 to-red-500 rounded flex items-center justify-center text-white font-bold text-xs">
-                    MC
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      •••• •••• •••• 8888
-                    </p>
-                    <p className="text-sm text-gray-500">Expires 07/25</p>
-                  </div>
-                </div>
-                <button className="text-sm text-red-600 hover:text-red-700 font-medium">
-                  Remove
-                </button>
-              </div>
-            </div>
-
-            <button className="w-full border-2 border-dashed border-gray-300 rounded-xl p-4 text-emerald-600 font-semibold hover:border-emerald-500 hover:bg-emerald-50 transition">
-              + Add New Payment Method
-            </button>
+          <div className="text-center py-12">
+            <CreditCard className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+              Payment Integration Coming Soon
+            </h3>
+            <p className="text-gray-600 mb-6">
+              We're working on integrating payment methods to make bill splitting even easier!
+            </p>
           </div>
         </div>
 
-        {/* Notifications */}
+        {}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-amber-100 rounded-lg">
@@ -259,11 +288,7 @@ const ProfileContent = () => {
           </div>
 
           <div className="space-y-3">
-            {Object.entries(notifications).map(([key, value]) => (
-              <div
-                key={key}
-                className="flex justify-between items-center border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition"
-              >
+            {Object.entries(notifications).map(([key, value]) => <div key={key} className="flex justify-between items-center border border-gray-200 rounded-xl p-5 hover:border-emerald-300 transition">
                 <div>
                   <p className="font-semibold text-gray-900">
                     {notificationLabels[key]}
@@ -276,22 +301,17 @@ const ProfileContent = () => {
                   </p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={value}
-                    onChange={() =>
-                      setNotifications({ ...notifications, [key]: !value })
-                    }
-                    className="sr-only peer"
-                  />
+                  <input type="checkbox" checked={value} onChange={() => setNotifications({
+                ...notifications,
+                [key]: !value
+              })} className="sr-only peer" />
                   <div className="w-11 h-6 bg-gray-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-emerald-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-emerald-600"></div>
                 </label>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
 
-        {/* Help & Support */}
+        {}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-6">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 bg-indigo-100 rounded-lg">
@@ -303,54 +323,33 @@ const ProfileContent = () => {
           </div>
 
           <div className="space-y-3">
-            {Object.entries(faqs).map(([key, open]) => (
-              <div
-                key={key}
-                className="border border-gray-200 rounded-xl overflow-hidden hover:border-emerald-300 transition"
-              >
-                <button
-                  onClick={() => toggleFAQ(key)}
-                  className="w-full text-left px-6 py-4 font-semibold flex justify-between items-center bg-white hover:bg-gray-50 transition"
-                >
+            {Object.entries(faqs).map(([key, open]) => <div key={key} className="border border-gray-200 rounded-xl overflow-hidden hover:border-emerald-300 transition">
+                <button onClick={() => toggleFAQ(key)} className="w-full text-left px-6 py-4 font-semibold flex justify-between items-center bg-white hover:bg-gray-50 transition">
                   <span className="text-gray-900">
                     {key === "addBill" && "How do I add a new bill?"}
                     {key === "unevenSplit" && "Can I split bills unevenly?"}
                     {key === "invite" && "How do I invite others to a bill?"}
                     {key === "unpaid" && "What if someone doesn't pay?"}
-                    {key === "updatePic" &&
-                      "How do I update my profile picture?"}
+                    {key === "updatePic" && "How do I update my profile picture?"}
                   </span>
-                  {open ? (
-                    <ChevronUp className="w-5 h-5 text-emerald-600" />
-                  ) : (
-                    <ChevronDown className="w-5 h-5 text-gray-400" />
-                  )}
+                  {open ? <ChevronUp className="w-5 h-5 text-emerald-600" /> : <ChevronDown className="w-5 h-5 text-gray-400" />}
                 </button>
-                {open && (
-                  <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+                {open && <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
                     <p className="text-gray-700 leading-relaxed">
                       {faqAnswers[key]}
                     </p>
-                  </div>
-                )}
-              </div>
-            ))}
+                  </div>}
+              </div>)}
           </div>
         </div>
 
-        {/* Logout Button */}
+        {}
         <div className="flex justify-center pt-4">
-          <button
-            onClick={() => navigate("/")}
-            type="button"
-            className="bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 flex items-center gap-3 font-semibold shadow-sm transition"
-          >
+          <button onClick={handleLogout} type="button" className="bg-gray-900 text-white px-8 py-4 rounded-xl hover:bg-gray-800 flex items-center gap-3 font-semibold shadow-sm transition">
             <LogOut className="w-5 h-5" /> Log Out
           </button>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default ProfileContent;

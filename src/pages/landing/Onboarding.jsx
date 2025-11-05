@@ -3,15 +3,12 @@ import { Menu, X, Users, Receipt, Wallet } from 'lucide-react';
 import Navbar from '../../components/Navbar';
 import FeatureCard from '../../components/FeaturedCard';
 import { useNavigate } from 'react-router-dom';
-
-
 const Onboarding = () => {
-  const navigate = useNavigate()
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+  const navigate = useNavigate();
+  return <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
       <Navbar />
 
-      {/* Hero Section */}
+      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 md:pt-24 pb-20">
         <div className="text-center space-y-8 max-w-4xl mx-auto">
           <div className="space-y-4">
@@ -38,7 +35,7 @@ const Onboarding = () => {
             </button>
           </div>
 
-          {/* Stats */}
+          {}
           <div className="grid grid-cols-3 gap-4 md:gap-8 pt-12 max-w-3xl mx-auto">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-emerald-600">100K+</div>
@@ -56,23 +53,11 @@ const Onboarding = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      {}
       <section id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <FeatureCard
-          icon={Receipt}
-          title="Split Bills Instantly, No Sign-up Needed"
-          description="Jump right in and start splitting expenses with friends. Our instant bill splitting feature requires zero commitment - just enter amounts and share. Perfect for quick calculations when dining out or traveling together."
-          image="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop"
-          reverse={false}
-        />
+        <FeatureCard icon={Receipt} title="Split Bills Instantly, No Sign-up Needed" description="Jump right in and start splitting expenses with friends. Our instant bill splitting feature requires zero commitment - just enter amounts and share. Perfect for quick calculations when dining out or traveling together." image="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop" reverse={false} />
 
-        <FeatureCard
-          icon={Users}
-          title="Manage Expenses Effortlessly with Friends and Family"
-          description="Keep track of shared costs without the awkward conversations. Our intuitive interface makes it easy to add expenses, see who owes what, and settle up when convenient. Transparency and fairness built right in."
-          image="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-          reverse={true}
-        />
+        <FeatureCard icon={Users} title="Manage Expenses Effortlessly with Friends and Family" description="Keep track of shared costs without the awkward conversations. Our intuitive interface makes it easy to add expenses, see who owes what, and settle up when convenient. Transparency and fairness built right in." image="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" reverse={true} />
 
         <div className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-3xl p-8 md:p-12 text-white text-center space-y-6 shadow-2xl">
           <Wallet className="w-16 h-16 mx-auto" />
@@ -88,7 +73,7 @@ const Onboarding = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-8 md:p-16 text-center text-white space-y-6 shadow-2xl">
           <h2 className="text-3xl md:text-5xl font-bold">
@@ -97,56 +82,14 @@ const Onboarding = () => {
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
             Join thousands of users who've made expense splitting effortless
           </p>
-          <button onClick={() => navigate('/welcome')}  className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-4">
+          <button onClick={() => navigate('/welcome')} className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-10 py-5 rounded-xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 mt-4">
             Get Started Free
           </button>
         </div>
       </section>
 
-      {/* Footer */}
-      {/* <footer className="bg-gray-900 text-gray-300 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h4 className="font-bold text-white mb-4">Product</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Features</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Pricing</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Security</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Company</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">About</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Careers</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Support</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Help Center</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">FAQ</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-white mb-4">Legal</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Privacy</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Terms</a></li>
-                <li><a href="#" className="hover:text-emerald-400 transition-colors">Cookie Policy</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-8 text-center">
-            <p>&copy; 2025 Splitaire. All rights reserved.</p>
-          </div>
-        </div>
-      </footer> */}
-    </div>
-  );
+      {}
+      {}
+    </div>;
 };
-
 export default Onboarding;

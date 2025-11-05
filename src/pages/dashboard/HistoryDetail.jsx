@@ -1,31 +1,36 @@
 import React, { useState } from "react";
 import { Edit2, Share2, CheckCircle } from "lucide-react";
-
 const HistoryDetail = () => {
   const [activeTab, setActiveTab] = useState("summary");
-
   const billData = {
     title: "Friend's dinner at The Gastronome",
     totalAmount: 125.75,
     date: "Mar 15, 2024",
-    paidBy: "Alex Johnson",
+    paidBy: "Alex Johnson"
   };
-
-  const splits = [
-    { id: 1, person: "Emily White", owesTo: "Alex Johnson", amount: 35.25 },
-    { id: 2, person: "Chris Green", owesTo: "Alex Johnson", amount: 20.0 },
-    { id: 3, person: "David Black", owesTo: "Emily White", amount: 25.5 },
-    { id: 4, person: "Jessica Blue", owesTo: "Alex Johnson", amount: 10.0 },
-  ];
-
-  return (
-    <div className="min-h-screen bg-gray-50 flex">
-      {/* {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-10 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        ></div>
-      )} */}
+  const splits = [{
+    id: 1,
+    person: "Emily White",
+    owesTo: "Alex Johnson",
+    amount: 35.25
+  }, {
+    id: 2,
+    person: "Chris Green",
+    owesTo: "Alex Johnson",
+    amount: 20.0
+  }, {
+    id: 3,
+    person: "David Black",
+    owesTo: "Emily White",
+    amount: 25.5
+  }, {
+    id: 4,
+    person: "Jessica Blue",
+    owesTo: "Alex Johnson",
+    amount: 10.0
+  }];
+  return <div className="min-h-screen bg-gray-50 flex">
+      {}
 
       <div className="flex-1 flex flex-col min-h-screen">
         <main className="flex-1 bg-gray-50 p-4 lg:p-8 flex items-start justify-center">
@@ -53,24 +58,13 @@ const HistoryDetail = () => {
               </div>
 
               <div className="flex gap-2">
-                {["summary", "participants", "insights"].map((tab) => (
-                  <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`px-6 py-2 rounded font-medium capitalize transition-colors ${
-                      activeTab === tab
-                        ? "bg-emerald-600 text-white"
-                        : "text-gray-600 hover:bg-gray-100"
-                    }`}
-                  >
+                {["summary", "participants", "insights"].map(tab => <button key={tab} onClick={() => setActiveTab(tab)} className={`px-6 py-2 rounded font-medium capitalize transition-colors ${activeTab === tab ? "bg-emerald-600 text-white" : "text-gray-600 hover:bg-gray-100"}`}>
                     {tab}
-                  </button>
-                ))}
+                  </button>)}
               </div>
             </div>
 
-            {activeTab === "summary" && (
-              <div className="p-6 bg-emerald-50">
+            {activeTab === "summary" && <div className="p-6 bg-emerald-50">
                 <div className="mb-4">
                   <h3 className="text-lg font-bold text-gray-900 mb-1">
                     Who Owes Who
@@ -91,19 +85,14 @@ const HistoryDetail = () => {
                   </div>
 
                   <div className="space-y-2 text-sm">
-                    {splits.map((split) => (
-                      <div
-                        key={split.id}
-                        className="flex justify-between items-center py-1"
-                      >
+                    {splits.map(split => <div key={split.id} className="flex justify-between items-center py-1">
                         <span className="text-gray-700">
                           {split.person} owes {split.owesTo}
                         </span>
                         <span className="font-bold text-red-600">
                           -${split.amount.toFixed(2)}
                         </span>
-                      </div>
-                    ))}
+                      </div>)}
                   </div>
                 </div>
 
@@ -117,11 +106,9 @@ const HistoryDetail = () => {
                     <span className="text-gray-900">{billData.paidBy}</span>
                   </div>
                 </div>
-              </div>
-            )}
+              </div>}
 
-            {activeTab === "participants" && (
-              <div className="p-6">
+            {activeTab === "participants" && <div className="p-6">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
                     <div className="flex items-center gap-3">
@@ -138,17 +125,10 @@ const HistoryDetail = () => {
                     <CheckCircle className="w-5 h-5 text-emerald-600" />
                   </div>
 
-                  {splits.map((split) => (
-                    <div
-                      key={split.id}
-                      className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200"
-                    >
+                  {splits.map(split => <div key={split.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-gray-700 font-semibold">
-                          {split.person
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
+                          {split.person.split(" ").map(n => n[0]).join("")}
                         </div>
                         <div>
                           <p className="font-semibold text-gray-900">
@@ -159,14 +139,11 @@ const HistoryDetail = () => {
                           </p>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
-              </div>
-            )}
+              </div>}
 
-            {activeTab === "insights" && (
-              <div className="p-6 text-center py-12">
+            {activeTab === "insights" && <div className="p-6 text-center py-12">
                 <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-3xl">📊</span>
                 </div>
@@ -176,13 +153,10 @@ const HistoryDetail = () => {
                 <p className="text-gray-600">
                   View analytics and spending patterns for this bill.
                 </p>
-              </div>
-            )}
+              </div>}
           </div>
         </main>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default HistoryDetail;

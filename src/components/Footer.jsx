@@ -1,7 +1,5 @@
-
 const Footer = () => {
-  return (
-  <footer className="bg-gray-900 text-gray-300 py-12">
+  return <footer className="bg-gray-900 text-gray-300 py-12">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
         <div>
@@ -41,8 +39,6 @@ const Footer = () => {
         <p>&copy; 2025 Splitaire. All rights reserved.</p>
       </div>
     </div>
-  </footer>
-)
-}
-
-export default Footer
+  </footer>;
+};
+export default Footer;

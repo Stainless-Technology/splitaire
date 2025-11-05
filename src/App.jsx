@@ -1,12 +1,8 @@
-// src/App.jsx
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-// Layouts
+import { AuthProvider } from './hooks/useAuth';
 import DashboardLayout from "./layouts/DashboardLayout";
 import GuestLayout from "./layouts/GuestLayout";
-
-// Pages
 import SignInPage from "./pages/auth/SignInPage";
 import SignUpPage from "./pages/auth/SignUpPage";
 import GuestLandingPage from "./pages/landing/GuestLandingPage";
@@ -20,10 +16,13 @@ import Onboarding from "./pages/landing/Onboarding";
 import GuestCreateBillPage from "./guest/GuestCreateBillPage";
 import AddFundsPage from "./components/AddFundsPage";
 import HistoryDetail from "./pages/dashboard/HistoryDetail";
-
+import HistoryDetailContent from "./components/HistoryDetailContent";
+import BillView from "./guest/BillView";
 function App() {
-  return (
-    <BrowserRouter>
+  return <BrowserRouter>
+
+
+    <AuthProvider>
       <Routes>
         <Route element={<GuestLayout />}>
           <Route path="/" element={<Onboarding />} />
@@ -31,6 +30,8 @@ function App() {
           <Route path="/login" element={<SignInPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/guest-1" element={<GuestCreateBillPage />} />
+          <Route path="/bill/:billId" element={<BillView />} />
+
         </Route>
 
         <Route path="/dashboard" element={<DashboardLayout />}>
@@ -41,11 +42,10 @@ function App() {
           <Route path="history" element={<HistoryPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="funds" element={<AddFundsPage />} />
-          <Route path="historydetail" element={<HistoryDetail />} />
-        </Route>
+          <Route path="/dashboard/historydetail/:billId" element={<HistoryDetailContent />} />       
+ </Route>
       </Routes>
-    </BrowserRouter>
-  );
+      </AuthProvider>
+    </BrowserRouter>;
 }
-
 export default App;
