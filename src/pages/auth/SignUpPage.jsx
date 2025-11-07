@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Mail, Lock, Eye, EyeOff, ArrowRight, Chrome, Apple, User, CheckCircle, AlertCircle } from "lucide-react";
 import Logo from "../../components/Logo";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 import { useAuth } from "../../hooks/useAuth";
 import { handlePendingGuestBill, hasPendingGuestBill } from "../../utility/guestBillHandler";
 export default function SignUp() {
@@ -72,47 +73,125 @@ export default function SignUp() {
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
   };
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setError("");
-    setValidationErrors({});
-    if (!validateForm()) {
-      return;
-    }
-    try {
-      const response = await register({
-        fullName: formData.name.trim(),
-        email: formData.email.trim().toLowerCase(),
-        password: formData.password
-      });
-      if (response.success) {
-        const pendingBillResult = await handlePendingGuestBill();
-        if (pendingBillResult) {
-          if (pendingBillResult.success) {
-            alert(`${pendingBillResult.message}\nYou can now view and share your bill.`);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError("");
+  setValidationErrors({});
+
+  if (!validateForm()) {
+    Swal.fire({
+      title: "Form Incomplete",
+      text: "Please fix the highlighted errors before continuing.",
+      icon: "warning",
+      confirmButtonColor: "#10B981",
+    });
+    return;
+  }
+
+  try {
+    const response = await register({
+      fullName: formData.name.trim(),
+      email: formData.email.trim().toLowerCase(),
+      password: formData.password,
+    });
+
+    if (response.success) {
+      const pendingBillResult = await handlePendingGuestBill();
+
+      if (pendingBillResult) {
+        if (pendingBillResult.success) {
+          Swal.fire({
+            title: "Bill Created!",
+            text: `${pendingBillResult.message}\nYou can now view and share your bill.`,
+            icon: "success",
+            confirmButtonColor: "#10B981",
+          }).then(() => {
             navigate(`/bill/${pendingBillResult.bill.billId}`);
-            return;
-          } else {
-            console.error('Failed to create pending bill:', pendingBillResult.message);
-          }
-        }
-        alert("Account created successfully! Welcome to Splitaire.");
-        navigate("/dashboard");
-      } else {
-        setError(response.message || "Registration failed. Please try again.");
-        if (response.errors && Array.isArray(response.errors)) {
-          const backendErrors = {};
-          response.errors.forEach(err => {
-            backendErrors[err.field] = err.message;
           });
-          setValidationErrors(backendErrors);
+          return;
+        } else {
+          console.error("Failed to create pending bill:", pendingBillResult.message);
         }
       }
-    } catch (err) {
-      console.error("Registration error:", err);
-      setError("An unexpected error occurred. Please try again.");
+
+      Swal.fire({
+        title: "Account Created!",
+        text: "Welcome to Splitaire 🎉",
+        icon: "success",
+        confirmButtonColor: "#10B981",
+      }).then(() => navigate("/dashboard"));
+    } else {
+      setError(response.message || "Registration failed. Please try again.");
+
+      Swal.fire({
+        title: "Registration Failed",
+        text: response.message || "Please try again.",
+        icon: "error",
+        confirmButtonColor: "#10B981",
+      });
+
+      if (response.errors && Array.isArray(response.errors)) {
+        const backendErrors = {};
+        response.errors.forEach((err) => {
+          backendErrors[err.field] = err.message;
+        });
+        setValidationErrors(backendErrors);
+      }
     }
-  };
+  } catch (err) {
+    console.error("Registration error:", err);
+    setError("An unexpected error occurred. Please try again.");
+
+    Swal.fire({
+      title: "Unexpected Error",
+      text: "Something went wrong. Please try again later.",
+      icon: "error",
+      confirmButtonColor: "#10B981",
+    });
+  }
+};
+
+  // const handleSubmit = async e => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setValidationErrors({});
+  //   if (!validateForm()) {
+  //     return;
+  //   }
+  //   try {
+  //     const response = await register({
+  //       fullName: formData.name.trim(),
+  //       email: formData.email.trim().toLowerCase(),
+  //       password: formData.password
+  //     });
+  //     if (response.success) {
+  //       const pendingBillResult = await handlePendingGuestBill();
+  //       if (pendingBillResult) {
+  //         if (pendingBillResult.success) {
+  //           alert(`${pendingBillResult.message}\nYou can now view and share your bill.`);
+  //           navigate(`/bill/${pendingBillResult.bill.billId}`);
+  //           return;
+  //         } else {
+  //           console.error('Failed to create pending bill:', pendingBillResult.message);
+  //         }
+  //       }
+  //       alert("Account created successfully! Welcome to Splitaire.");
+  //       navigate("/dashboard");
+  //     } else {
+  //       setError(response.message || "Registration failed. Please try again.");
+  //       if (response.errors && Array.isArray(response.errors)) {
+  //         const backendErrors = {};
+  //         response.errors.forEach(err => {
+  //           backendErrors[err.field] = err.message;
+  //         });
+  //         setValidationErrors(backendErrors);
+  //       }
+  //     }
+  //   } catch (err) {
+  //     console.error("Registration error:", err);
+  //     setError("An unexpected error occurred. Please try again.");
+  //   }
+  // };
   return <div className="min-h-screen bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 flex items-center justify-center px-4 py-8 relative overflow-hidden">
       {}
       <div className="absolute inset-0 overflow-hidden">
@@ -274,11 +353,11 @@ export default function SignUp() {
             </button>
 
             {}
-            <div className="relative my-6">
+            {/* <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
+              </div> */}
+              {/* <div className="relative flex justify-center text-sm">
                 <span className="px-4 bg-white text-gray-500 font-semibold">Or sign up with</span>
               </div>
             </div>
@@ -297,7 +376,7 @@ export default function SignUp() {
                 </div>
                 <span>Apple</span>
               </button>
-            </div>
+            </div> */}
 
             {}
             <div className="text-center pt-4 pb-2">

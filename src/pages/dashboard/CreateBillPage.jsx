@@ -3,7 +3,6 @@ import {
   Plus,
   X,
   User,
-  DollarSign,
   FileText,
   Users,
   Sparkles,
@@ -17,6 +16,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import { useCreateBill } from "../../hooks/useBills";
+import { FaNairaSign } from "react-icons/fa6";
+
 const CreateBillPage = () => {
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuth();
@@ -24,7 +25,7 @@ const CreateBillPage = () => {
   const [formData, setFormData] = useState({
     billName: "",
     totalAmount: "",
-    currency: "USD",
+    currency: "NGN",
     notes: "",
   });
   const [accountDetails, setAccountDetails] = useState({
@@ -245,7 +246,8 @@ const CreateBillPage = () => {
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden">
+          className="bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden"
+        >
           <div className="p-6 md:p-8 space-y-8">
             {error && (
               <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4 flex items-start space-x-3">
@@ -318,7 +320,7 @@ const CreateBillPage = () => {
                     Total Amount *
                   </label>
                   <div className="relative">
-                    <DollarSign
+                    <FaNairaSign
                       className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 ${
                         validationErrors.totalAmount
                           ? "text-red-500"
@@ -443,7 +445,7 @@ const CreateBillPage = () => {
                     Payment Handle
                   </label>
                   <div className="relative">
-                    <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <FaNairaSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     <input
                       type="text"
                       placeholder="@username or PayPal, Venmo, etc."
@@ -473,7 +475,8 @@ const CreateBillPage = () => {
                     splitType === "equal"
                       ? "bg-emerald-600 text-white shadow-lg scale-105"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}>
+                  } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
                   <div className="flex items-center justify-center space-x-2">
                     <Users className="w-5 h-5" />
                     <span>Equal Split</span>
@@ -488,9 +491,10 @@ const CreateBillPage = () => {
                     splitType === "custom"
                       ? "bg-emerald-600 text-white shadow-lg scale-105"
                       : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}>
+                  } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
                   <div className="flex items-center justify-center space-x-2">
-                    <DollarSign className="w-5 h-5" />
+                    <FaNairaSign className="w-5 h-5" />
                     <span>Custom Split</span>
                   </div>
                 </button>
@@ -642,7 +646,7 @@ const CreateBillPage = () => {
 
                         {splitType === "custom" && (
                           <div className="relative">
-                            <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <FaNairaSign className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input
                               type="number"
                               step="0.01"
@@ -667,7 +671,8 @@ const CreateBillPage = () => {
                           type="button"
                           onClick={() => removeParticipant(participant.id)}
                           disabled={loading}
-                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-600 hover:bg-red-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                          className="w-10 h-10 flex items-center justify-center rounded-xl bg-red-50 text-red-600 hover:bg-red-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
                           <X className="w-5 h-5" />
                         </button>
                       )}
@@ -679,7 +684,8 @@ const CreateBillPage = () => {
                   type="button"
                   onClick={addParticipant}
                   disabled={loading}
-                  className="w-full flex items-center justify-center space-x-2 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-emerald-500 hover:text-emerald-600 hover:bg-emerald-50 transition-all duration-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
+                  className="w-full flex items-center justify-center space-x-2 py-3 border-2 border-dashed border-gray-300 rounded-xl text-gray-600 hover:border-emerald-500 hover:text-emerald-600 hover:bg-emerald-50 transition-all duration-200 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                   <Plus className="w-5 h-5" />
                   <span>Add Participant</span>
                 </button>
@@ -702,7 +708,8 @@ const CreateBillPage = () => {
                 }
                 disabled={loading}
                 rows="4"
-                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-colors resize-none text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"></textarea>
+                className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-colors resize-none text-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
+              ></textarea>
             </div>
 
             {}
@@ -713,7 +720,8 @@ const CreateBillPage = () => {
                 loading
                   ? "opacity-70 cursor-not-allowed"
                   : "hover:shadow-2xl hover:scale-105"
-              }`}>
+              }`}
+            >
               {loading ? (
                 <>
                   <Loader className="w-5 h-5 animate-spin" />

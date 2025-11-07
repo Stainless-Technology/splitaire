@@ -30,7 +30,7 @@ const Onboarding = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </button>
-            <button className="border-2 border-emerald-600 text-emerald-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-emerald-50 transition-all duration-300">
+            <button onClick={() => navigate("/learnmore")} className="border-2 border-emerald-600 text-emerald-600 px-8 py-4 rounded-xl font-bold text-lg hover:bg-emerald-50 transition-all duration-300">
               Learn More
             </button>
           </div>
@@ -67,9 +67,9 @@ const Onboarding = () => {
           <p className="text-lg md:text-xl text-emerald-50 max-w-3xl mx-auto">
             Whether it's a vacation fund, household expenses, or a group gift, manage shared money with complete transparency and ease.
           </p>
-          <button className="bg-white text-emerald-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300 mt-4">
+          {/* <button  className="bg-white text-emerald-600 px-8 py-4 rounded-xl font-bold text-lg hover:shadow-xl hover:scale-105 transition-all duration-300 mt-4">
             Create Your First Group
-          </button>
+          </button> */}
         </div>
       </section>
 

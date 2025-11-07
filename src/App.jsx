@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from './hooks/useAuth';
+import { AuthProvider } from "./hooks/useAuth";
 import DashboardLayout from "./layouts/DashboardLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import SignInPage from "./pages/auth/SignInPage";
@@ -18,34 +18,38 @@ import AddFundsPage from "./components/AddFundsPage";
 import HistoryDetail from "./pages/dashboard/HistoryDetail";
 import HistoryDetailContent from "./components/HistoryDetailContent";
 import BillView from "./guest/BillView";
+import LearnMore from "./components/LearnMore";
 function App() {
-  return <BrowserRouter>
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          <Route element={<GuestLayout />}>
+            <Route path="/" element={<Onboarding />} />
+            <Route path="/welcome" element={<GuestLandingPage />} />
+            <Route path="/login" element={<SignInPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/guest-1" element={<GuestCreateBillPage />} />
+            <Route path="/bill/:billId" element={<BillView />} />
+            <Route path="/learnmore" element={<LearnMore />} />
+          </Route>
 
-
-    <AuthProvider>
-      <Routes>
-        <Route element={<GuestLayout />}>
-          <Route path="/" element={<Onboarding />} />
-          <Route path="/welcome" element={<GuestLandingPage />} />
-          <Route path="/login" element={<SignInPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/guest-1" element={<GuestCreateBillPage />} />
-          <Route path="/bill/:billId" element={<BillView />} />
-
-        </Route>
-
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<DashboardHomePage />} />
-          <Route path="create-bill" element={<CreateBillPage />} />
-          <Route path="bill/:id" element={<BillViewPage />} />
-          <Route path="summary/:id" element={<BillSummaryPage />} />
-          <Route path="history" element={<HistoryPage />} />
-          <Route path="profile" element={<ProfilePage />} />
-          <Route path="funds" element={<AddFundsPage />} />
-          <Route path="/dashboard/historydetail/:billId" element={<HistoryDetailContent />} />       
- </Route>
-      </Routes>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<DashboardHomePage />} />
+            <Route path="create-bill" element={<CreateBillPage />} />
+            <Route path="bill/:id" element={<BillViewPage />} />
+            <Route path="summary/:id" element={<BillSummaryPage />} />
+            <Route path="history" element={<HistoryPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="funds" element={<AddFundsPage />} />
+            <Route
+              path="/dashboard/historydetail/:billId"
+              element={<HistoryDetailContent />}
+            />
+          </Route>
+        </Routes>
       </AuthProvider>
-    </BrowserRouter>;
+    </BrowserRouter>
+  );
 }
 export default App;
