@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./hooks/useAuth";
+import ScrollToTop from "./components/ScrollToTop"; // 👈 Import this
 import DashboardLayout from "./layouts/DashboardLayout";
 import GuestLayout from "./layouts/GuestLayout";
 import SignInPage from "./pages/auth/SignInPage";
@@ -15,14 +16,15 @@ import ProfilePage from "./pages/dashboard/ProfilePage";
 import Onboarding from "./pages/landing/Onboarding";
 import GuestCreateBillPage from "./guest/GuestCreateBillPage";
 import AddFundsPage from "./components/AddFundsPage";
-import HistoryDetail from "./pages/dashboard/HistoryDetail";
 import HistoryDetailContent from "./components/HistoryDetailContent";
 import BillView from "./guest/BillView";
 import LearnMore from "./components/LearnMore";
+
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
+        <ScrollToTop />
         <Routes>
           <Route element={<GuestLayout />}>
             <Route path="/" element={<Onboarding />} />
@@ -52,4 +54,5 @@ function App() {
     </BrowserRouter>
   );
 }
+
 export default App;
