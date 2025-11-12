@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://Splitaire-backend.onrender.com/api';
+const API_BASE_URL = 'https://splitaire-backend.onrender.com/api';
 const config = {
   baseURL: API_BASE_URL,
   timeout: 30000,
